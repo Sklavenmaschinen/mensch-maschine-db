@@ -1,0 +1,17 @@
+FROM openjdk:8-jdk-alpine
+
+ENV H2 h2-2018-03-18.zip
+ENV DATA_DIR /opt/h2-data
+
+COPY $H2 h2.zip
+RUN mkdir -p ${DATA_DIR} \
+    && unzip h2.zip -d /opt/ \
+    && rm h2.zip
+
+COPY h2.server.properties /root/.h2.server.properties
+
+CMD java -cp /opt/h2/bin/h2*.jar org.h2.tools.Server \
+ 	-tcp -tcpAllowOthers -tcpPort 1521 \
+ 	-baseDir ${DATA_DIR}
+
+EXPOSE 1521
