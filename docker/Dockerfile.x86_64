@@ -12,6 +12,6 @@ COPY h2.server.properties /root/.h2.server.properties
 
 CMD java -cp /opt/h2/bin/h2*.jar org.h2.tools.Server \
  	-tcp -tcpAllowOthers -tcpPort 1521 \
- 	-baseDir ${DATA_DIR}
+ 	-baseDir ${DATA_DIR} 
 
 EXPOSE 1521
